@@ -1,0 +1,11 @@
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/bin/Debug/net10.0/GenericApiProject.Services.deps.json
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/bin/Debug/net10.0/GenericApiProject.Services.dll
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/bin/Debug/net10.0/GenericApiProject.Services.pdb
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/GenericApiProject.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/GenericApiProject.Services.AssemblyInfoInputs.cache
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/GenericApiProject.Services.AssemblyInfo.cs
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/GenericApiProject.Services.csproj.CoreCompileInputs.cache
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/GenericApiProject.Services.dll
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/refint/GenericApiProject.Services.dll
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/GenericApiProject.Services.pdb
+/Users/tanvir/Documents/Projects/DotNet/Dotnet-10/GenericApiProject/GenericApiProject.Services/obj/Debug/net10.0/ref/GenericApiProject.Services.dll
