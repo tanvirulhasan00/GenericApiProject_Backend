@@ -17,7 +17,7 @@ public class ServiceManager : IServiceManager
     {
         _db = db;
         var secretKey = configuration.GetSection("SecretKey").Value ?? "";
-        AuthService = new AuthService(_db,userManager, roleManager, secretKey);
+        AuthService = new AuthService(_db,userManager, secretKey);
     }
    
     

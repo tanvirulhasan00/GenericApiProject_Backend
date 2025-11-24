@@ -1,0 +1,9 @@
+namespace GenericApiProject.Models.GenericModels;
+
+public class LoginResponse
+{
+    public string UserId { get; set; }
+    public string Role { get; set; }
+    public string Token { get; set; }
+    public DateTime TokenExpire { get; set; }
+}

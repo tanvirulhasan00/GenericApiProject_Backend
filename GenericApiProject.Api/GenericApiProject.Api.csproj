@@ -38,6 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GenericApiProject.Database\GenericApiProject.Database.csproj" />
     <ProjectReference Include="..\GenericApiProject.Models\GenericApiProject.Models.csproj" />
+    <ProjectReference Include="..\GenericApiProject.Services\GenericApiProject.Services.csproj" />
   </ItemGroup>
 
 </Project>

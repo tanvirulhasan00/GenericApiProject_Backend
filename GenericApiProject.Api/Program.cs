@@ -2,6 +2,8 @@ using System.Text;
 using Asp.Versioning;
 using GenericApiProject.Database.Data;
 using GenericApiProject.Models.DatabaseEntity.User;
+using GenericApiProject.Services.IService;
+using GenericApiProject.Services.Service;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -26,6 +28,9 @@ builder.Services.AddDbContext<GenericApiDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<GenericApiDbContext>()
     .AddDefaultTokenProviders();
+
+// scopes
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 //openapi config
 builder.Services.AddOpenApi(options =>
