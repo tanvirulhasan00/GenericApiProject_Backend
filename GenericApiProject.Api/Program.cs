@@ -5,6 +5,7 @@ using GenericApiProject.Database.Data;
 using GenericApiProject.Models.DatabaseEntity.User;
 using GenericApiProject.Services.IService;
 using GenericApiProject.Services.Service;
+using GenericApiProject.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHealthChecks();
 // DbContext
 builder.Services.AddDbContext<GenericApiDbContext>(options =>
     options.UseNpgsql(
@@ -33,7 +35,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 // scopes
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<ICheckerService, CheckerService>();
-builder.Services.AddScoped<IDbInitializerService, IDbInitializerService>();
+builder.Services.AddScoped<IDbInitializerService, DbInitializerService>();
 
 //openapi config
 builder.Services.AddOpenApi(options =>
@@ -160,14 +162,12 @@ app.MapHealthChecks("/health");
 app.MapControllers();
 
 var cString = builder.Configuration.GetConnectionString("LocalConnectionString") ?? "";
-var res = await HelperFunction.ChecksDbConnection(app, cString);
-if (!res)
+var isOk = await DbHelperService.ChecksDbConnection(app.Services, cString);
+if (!isOk)
 {
-    // stop app completely
     return;
 }
-await HelperFunction.SeedDatabaseAsync(app);
-
+await DbHelperService.SeedDatabaseAsync(app.Services);
 app.Run();
 
 internal sealed class BearerSecuritySchemeTransformer(IAuthenticationSchemeProvider authenticationSchemeProvider) : IOpenApiDocumentTransformer

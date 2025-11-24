@@ -23,7 +23,6 @@ public class AuthService: Service<ApplicationUser>, IAuthService
     public AuthService(
         GenericApiDbContext db,
         UserManager<ApplicationUser> userManager,
-        
         string secretKey
     ) : base(db)
     {

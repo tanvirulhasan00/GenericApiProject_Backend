@@ -1,14 +1,15 @@
 using GenericApiProject.Services.IService;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace GenericApiProject.Api;
+namespace GenericApiProject.Services.Service;
 
-public static class HelperFunction
+public static class DbHelperService
 {
-    public static async Task<bool> ChecksDbConnection(WebApplication app, string connectionString)
+    public static async Task<bool> ChecksDbConnection(IServiceProvider services, string connectionString)
     {
-        using var scope = app.Services.CreateScope();
+        using var scope = services.CreateScope();
         var dbChecker = scope.ServiceProvider.GetRequiredService<ICheckerService>();
-        
+
         var isConnected = await dbChecker.IsDbConnectedAsync(connectionString);
 
         Console.WriteLine(isConnected
@@ -18,10 +19,10 @@ public static class HelperFunction
         return isConnected;
     }
 
-    public static async Task SeedDatabaseAsync(WebApplication app)
+    public static async Task SeedDatabaseAsync(IServiceProvider services)
     {
-        using var scope = app.Services.CreateScope();
+        using var scope = services.CreateScope();
         var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializerService>();
-        await dbInitializer.InitializeAsync(); 
+        await dbInitializer.InitializeAsync();
     }
 }

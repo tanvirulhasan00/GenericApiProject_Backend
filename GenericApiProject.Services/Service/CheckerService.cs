@@ -11,12 +11,13 @@ public class CheckerService : ICheckerService
         {
             await using var connection = new NpgsqlConnection(connectionString);
             await connection.OpenAsync();
+            Console.WriteLine("✅ Database is connected!");
             return true;
 
         }
         catch (Exception ex) 
         {
-            Console.WriteLine($"Database connection failed: {ex.Message}");
+            Console.WriteLine($"❌ Database connection failed: {ex.Message}");
             return false;
         }
     }

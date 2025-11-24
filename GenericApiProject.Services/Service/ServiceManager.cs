@@ -16,7 +16,8 @@ public class ServiceManager : IServiceManager
     public ServiceManager(GenericApiDbContext db,IConfiguration configuration, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _db = db;
-        var secretKey = configuration.GetSection("SecretKey").Value ?? "";
+        var secretKey = configuration["TokenSetting:SecretKey"] ?? "";
+        Console.WriteLine(secretKey);
         AuthService = new AuthService(_db,userManager, secretKey);
     }
    

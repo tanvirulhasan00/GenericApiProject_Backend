@@ -1,12 +1,13 @@
 using GenericApiProject.Database.Data;
 using GenericApiProject.Models.DatabaseEntity.User;
+using GenericApiProject.Services.IService;
 using GenericApiProject.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GenericApiProject.Services.Service;
 
-public class DbInitializerService
+public class DbInitializerService : IDbInitializerService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
