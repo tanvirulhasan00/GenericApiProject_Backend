@@ -1,5 +1,6 @@
 using System.Text;
 using Asp.Versioning;
+using GenericApiProject.Api;
 using GenericApiProject.Database.Data;
 using GenericApiProject.Models.DatabaseEntity.User;
 using GenericApiProject.Services.IService;
@@ -31,12 +32,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 // scopes
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddScoped<ICheckerService, CheckerService>();
+builder.Services.AddScoped<IDbInitializerService, IDbInitializerService>();
 
 //openapi config
 builder.Services.AddOpenApi(options =>
 {
     options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
-    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    options.AddDocumentTransformer((document, _,_) =>
     {
         document.Info = new()
         {
@@ -50,7 +53,7 @@ builder.Services.AddOpenApi(options =>
 });
 builder.Services.AddOpenApi("v2",options =>
 {
-    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    options.AddDocumentTransformer((document, _,_) =>
     {
         document.Info = new()
         {
@@ -153,10 +156,19 @@ app.MapGet("/", context =>
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHealthChecks("/health");
 app.MapControllers();
 
-app.Run();
+var cString = builder.Configuration.GetConnectionString("LocalConnectionString") ?? "";
+var res = await HelperFunction.ChecksDbConnection(app, cString);
+if (!res)
+{
+    // stop app completely
+    return;
+}
+await HelperFunction.SeedDatabaseAsync(app);
 
+app.Run();
 
 internal sealed class BearerSecuritySchemeTransformer(IAuthenticationSchemeProvider authenticationSchemeProvider) : IOpenApiDocumentTransformer
 {
